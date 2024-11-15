@@ -1,0 +1,206 @@
+<!-- Import du contexte du dataset -->
+<ods-dataset-context context="resultatslieu, secteursdesbureauxdevote, bureauxdevote, contourscommune" 
+                     resultatslieu-dataset="poc_chaville_election"
+                     secteursdesbureauxdevote-dataset="secteurs-des-bureaux-de-vote" 
+                     secteursdesbureauxdevote-domain="chaville-seineouest.opendatasoft.com"
+                     bureauxdevote-dataset="bureaux-de-vote"
+                     bureauxdevote-domain="chaville-seineouest.opendatasoft.com"
+                     contourscommune-dataset="georef-france-commune-millesime@public"
+                     contourscommune-domain="public.opendatasoft.com"
+                     contourscommune-context="georeffrancecommunemillesime"
+                     contourscommune-parameters="{'flg':'fr-fr',
+                                                 'disjunctive.reg_name':true,
+                                                 'disjunctive.dep_name':true,
+                                                 'disjunctive.arrdep_name':true,
+                                                 'disjunctive.ze2020_name':true,
+                                                 'disjunctive.bv2022_name':true,
+                                                 'disjunctive.epci_name':true,
+                                                 'disjunctive.ept_name':true,
+                                                 'disjunctive.com_name':true,
+                                                 'disjunctive.ze2010_name':true,
+                                                 'disjunctive.com_is_mountain_area':true,
+                                                 'sort':'year',
+                                                 'q':'chaville and 2023'}">
+
+    <div class="row ods-box">
+        <div class="col-md-7">
+            <h1 class="first-header">Élections législatives 2024 (second tour)</h1>
+            <!-- Éléments à afficher -->
+            <div class="infos-carto">
+                <div class="map-legend" style="padding: .3rem 0">
+                    <div class="map-legend-item">
+                        Cliquez sur un lieu de vote 
+                        <i class="fa fa-circle symbol_bv" style="color: #bc1768;"> </i>
+                        pour afficher les résultats de celui-ci !
+                    </div>
+                </div>
+            </div>
+            <!-- Afficher la carte -->
+            <ods-map style="height:620px;margin-bottom:10px;"
+                     scroll-wheel-zoom="false"
+                     basemap="jawg.light">
+                <ods-map-layer-group>
+                    <ods-map-layer context="bureauxdevote"
+                                   refine-on-click-context="[resultatslieu]"
+                                   refine-on-click-resultatslieu-map-field="num_bureau"
+                                   refine-on-click-resultatslieu-context-field="code_lieu_de_vote"
+                                   refine-on-click-resultatslieu-replace-refine="true"
+                                   caption-picto-color="#bc1768" 
+                                   color="#bc1768"
+                                   color-by-field="num_bureau"
+                                   picto="dot" 
+                                   show-marker="false"
+                                   size="7">
+                    </ods-map-layer>
+                </ods-map-layer-group>
+                <ods-map-layer-group>
+                    <ods-map-layer context="contourscommune" 
+                                   color="#C32D1C" 
+                                   picto="ods-circle" 
+                                   show-marker="false" 
+                                   display="auto" 
+                                   shape-opacity="0" 
+                                   point-opacity="1" 
+                                   tooltip-disabled="true" 
+                                   border-color="#2C3F56" 
+                                   border-opacity="1"
+                                   border-size="3" 
+                                   border-pattern="solid" 
+                                   caption="false" 
+                                   title="Contours du Territoire GPSO" 
+                                   description="Contours de la Ville de Chaville"
+                                   size="4" 
+                                   size-min="3" 
+                                   size-max="5" 
+                                   size-function="linear">
+                    </ods-map-layer>
+                </ods-map-layer-group>
+            </ods-map>
+        </div>          
+        <!-- Afficher les résultats -->
+        <div class="col-md-5">
+            <div ng-if="!resultatslieu.parameters['refine.code_lieu_de_vote']">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Résultats de participation -->
+                        <div ods-analysis="election"
+                             ods-analysis-context="resultatslieu"
+                             ods-analysis-serie-inscrits="SUM(nb_inscrits)"
+                             ods-analysis-serie-blancs="SUM(nb_blanc)"
+                             ods-analysis-serie-nuls="SUM(nb_nuls)"
+                             ods-analysis-serie-exprimes="SUM(nb_exprimes)"
+                             >
+                            <!-- Donner des informations concernant les données affichés -->
+                            <div>
+                                <h2 class="first-header">Résultat global</h2> 
+                            </div>
+                            <div class="participation">
+                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ (election.results[0].exprimes+election.results[0].blancs)*100/election.results[0].inscrits}}%"><span class="metric_chiffre2"> {{ (election.results[0].exprimes+election.results[0].blancs)*100/election.results[0].inscrits | number: 1}}% Participation</span></div></div>
+                            </div>
+                            <div class="metrics row">
+                                <div class="metric col-sm-3">
+                                    <span class="metric_chiffre ">{{ election.results[0].inscrits / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                                    <span class="metric_name">Inscrits</span>
+                                </div>
+                                <div class="metric col-sm-3">
+                                    <span class="metric_chiffre ">{{ election.results[0].blancs / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                                    <span class="metric_name">Blancs</span>
+                                </div>
+                                <div class="metric col-sm-3">
+                                    <span class="metric_chiffre ">{{ election.results[0].nuls / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                                    <span class="metric_name">Nuls</span>
+                                </div>
+                                <div class="metric col-sm-3">
+                                    <span class="metric_chiffre ">{{ election.results[0].exprimes / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                                    <span class="metric_name">Exprimés</span>
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <!-- Résultats par liste -->
+                        <div class="col-md-12">
+                            <div ods-analysis="candidat"
+                                 ods-analysis-context="resultatslieu"
+                                 ods-analysis-x="candidat"
+                                 ods-analysis-serie-voix="SUM(nb_voix)"
+                                 ods-analysis-serie-exprimes="SUM(nb_exprimes)"
+                                 ods-analysis-serie-blancs="SUM(nb_blanc)"
+                                 ods-analysis-sort="voix"
+                                 style="height:550px;overflow:scroll;"
+                                 >
+                                <div ng-repeat="(i, result) in candidat.results">
+                                    <div class="candidat">
+                                        <div class="name">{{result.x}}</div>
+                                        <div class="fond_bar" style="width : 100%"> 
+                                            <div class="result">
+                                                <span class="voix bold">{{ result.voix | number }} voix </span>|<span class="pourcent"> {{ result.voix*100/(result.exprimes) | number:2}}%</span>
+                                            </div>
+                                            <div class="bar" style="width : {{ result.voix*100/result.exprimes}}%"></div>
+                                        </div>
+                                    </div>   
+                                </div>      
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Résultat par lieu de vote (lorsque l'utilisateur le sélectionne sur la carte)-->
+            <div ng-if="resultatslieu.parameters['refine.code_lieu_de_vote']">
+                <ods-result-enumerator context="resultatslieu" max="1" show-pagination="false">
+                    <h2 class="first-header">Résultats bureau : {{item.fields.nom_bureau}}</h2>
+                </ods-result-enumerator>                        
+                <div ods-analysis="resultatsbureau"
+                     ods-analysis-context="resultatslieu"
+                     ods-analysis-serie-inscrits="SUM(nb_inscrits)"
+                     ods-analysis-serie-blancs="SUM(nb_blanc)"
+                     ods-analysis-serie-nuls="SUM(nb_nuls)"
+                     ods-analysis-serie-exprimes="SUM(nb_exprimes)">
+
+                    <div class="participation">
+                        <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ (resultatsbureau.results[0].exprimes+resultatsbureau.results[0].blancs)*100/resultatsbureau.results[0].inscrits}}%"><span class="metric_chiffre2"> {{ (resultatsbureau.results[0].exprimes+resultatsbureau.results[0].blancs)*100/resultatsbureau.results[0].inscrits | number : 1 }}% Participation</span></div></div>
+                    </div>
+                    <div class="metrics row">
+                        <div class="metric col-sm-3">
+                            <span class="metric_chiffre">{{ resultatsbureau.results[0].inscrits / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                            <span class="metric_name">Inscrits</span>
+                        </div>
+                        <div class="metric col-sm-3">
+                            <span class="metric_chiffre">{{ resultatsbureau.results[0].blancs / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                            <span class="metric_name">blancs</span>
+                        </div>
+                        <div class="metric col-sm-3">
+                            <span class="metric_chiffre">{{ resultatsbureau.results[0].nuls / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                            <span class="metric_name">nuls</span>
+                        </div>
+                        <div class="metric col-sm-3">
+                            <span class="metric_chiffre">{{ resultatsbureau.results[0].exprimes / 2 | number }}</span> <!-- Penser à changer le nombre diviseur selon le nombre de liste ou de candidat -->
+                            <span class="metric_name">Exprimés</span>
+                        </div>
+                    </div>   
+                </div>
+                <div class="col-md-12">
+                    <div ods-analysis="candidat"
+                         ods-analysis-context="resultatslieu"
+                         ods-analysis-x="candidat"
+                         ods-analysis-serie-voix="SUM(nb_voix)"
+                         ods-analysis-serie-exprimes="SUM(nb_exprimes)"
+                         ods-analysis-sort="voix"
+                         style="height:fit-content;hoverflow: hidden;">
+                        <div ng-repeat="(i, result) in candidat.results">
+                            <div class="candidat">
+                                <div class="name">{{result.x}}</div>
+                                <div class="fond_bar" style="width : 100%"> 
+                                    <div class="result">
+                                        <span class="voix bold">{{ result.voix | number }} voix </span>|<span class="pourcent"> {{ result.voix*100/(result.exprimes) | number:2}}%</span>
+                                    </div>
+                                    <div class="bar" style="width : {{ result.voix*100/result.exprimes}}%"></div>
+                                </div>
+                            </div>  
+                        </div>      
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ods-dataset-context>

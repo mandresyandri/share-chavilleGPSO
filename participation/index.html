@@ -1,0 +1,323 @@
+<ods-dataset-context context="ctx" ctx-dataset="participation_legislatives_participation_chaville">
+    <div>
+        <ods-dataset-context bureauxdevote-dataset="bureaux-de-vote"
+                             bureauxdevote-domain="chaville-seineouest.opendatasoft.com"
+                             context="bureauxdevote,secteursdesbureauxdevote,participation,participation2" 
+                             participation-dataset="participation_legislatives_participation_chaville" 
+                             participation2-dataset="participation_legislatives_participation_chaville" 
+                             secteursdesbureauxdevote-dataset="secteurs-des-bureaux-de-vote" 
+                             secteursdesbureauxdevote-domain="chaville-seineouest.opendatasoft.com">
+            <div class="row ods-box">
+                <div class="col-md-7">
+                    <h1>
+                        Législatives 2024, second tour : participation à Chaville
+                        <br/>  
+                    </h1>
+      <div class="map-legend">
+          <div class="map-legend-item">
+              Cliquez sur un lieu de vote 
+              <i class="fa fa-circle symbol_bv"> </i>
+               pour afficher les résultats de celui-ci !
+          </div>
+      </div>    
+                <!-- LE REFINE ON-CLICK ICI NE MARCHE PAS :( -->
+                    <!-- Idée de solution  ==> changer code_lieu_de_vote en num_bureau -->
+                <ods-map basemap="jawg.streets" 
+                    display-control="false" 
+                    scroll-wheel-zoom="false" 
+                    style="height:600px;margin-bottom:10px;">
+                        <ods-map-layer-group>
+                            <ods-map-layer 
+                                caption-picto-color="#FFE548" 
+                                color="#FFE548" 
+                                context="bureauxdevote" 
+                                picto="dot" 
+                                refine-on-click-context="[participation,participation2]" 
+                                refine-on-click-participation-context-field="num_bureau" 
+                                refine-on-click-participation-map-field="num_bureau" 
+                                refine-on-click-participation-replace-refine="true" 
+                                refine-on-click-participation2-context-field="num_bureau" 
+                                refine-on-click-participation2-map-field="num_bureau" 
+                                refine-on-click-participation2-replace-refine="true" 
+                                show-marker="false" size="7">
+                            </ods-map-layer>
+                        </ods-map-layer-group>
+                    <ods-map-layer-group displayed="true">
+                        <ods-map-layer border-color="#FFFFFF" 
+                            border-opacity="1" 
+                            border-pattern="solid" 
+                            border-size="1" 
+                            caption="false" 
+                            caption-picto-color="#39BA99" 
+                            color="#39BA99" 
+                            context="secteursdesbureauxdevote" 
+                            display="auto" 
+                            picto="ods-museum" 
+                            point-opacity="1" 
+                            refine-on-click-context="[participation,participation2]" 
+                            refine-on-click-participation-context-field="num_bureau" 
+                            refine-on-click-participation-map-field="num_bureau" 
+                            refine-on-click-participation-replace-refine="true" 
+                            refine-on-click-participation2-context-field="num_bureau" 
+                            refine-on-click-participation2-map-field="num_bureau" 
+                            refine-on-click-participation2-replace-refine="true" 
+                            shape-opacity="0.5" 
+                            show-marker="true" 
+                            size="4" 
+                            size-function="linear" 
+                            size-max="5" 
+                            size-min="3" 
+                            title="Secteurs de vote">
+                        </ods-map-layer>
+                    </ods-map-layer-group>
+                    </ods-map>
+                </div>
+                <div class="col-md-5">
+                    <div ng-if="!participation.parameters['refine.num_bureau']">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div ods-analysis="chiffresparticipation" 
+                                    ods-analysis-context="participation" 
+                                    ods-analysis-serie-exprimes10h="SUM(votants_10h)" 
+                                    ods-analysis-serie-exprimes12h="SUM(votants_12h)" 
+                                    ods-analysis-serie-exprimes14h="SUM(votants_14h)" 
+                                    ods-analysis-serie-exprimes16h="SUM(votants_16h)" 
+                                    ods-analysis-serie-exprimes17h="SUM(votants_17h)" 
+                                    ods-analysis-serie-exprimes18h="SUM(votants_18h)" 
+                                    ods-analysis-serie-exprimes19h="SUM(votants_19h)" 
+                                    ods-analysis-serie-exprimes20h="SUM(votants_20h)" 
+                                    ods-analysis-serie-inscrits="SUM(inscrits)">
+                                    <h3>
+                                        Participation à 10h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes10h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> 
+                                                    {{ chiffresparticipation.results[0].exprimes10h*100/chiffresparticipation.results[0].inscrits | number:1}}%
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>
+                                        Participation à 12h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes12h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes12h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>
+                                        Participation à 14h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes14h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes14h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>
+                                        Participation à 16h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes16h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes16h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>
+                                        Participation à 17h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes17h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes17h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>
+                                        Participation à 18h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes18h*100/chiffresparticipation.results[0].inscrits}}%">
+                                            <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes18h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span></div></div>
+                                    </div>
+                                    <h3>
+                                        Participation à 19h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes19h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes19h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <h3>
+                                        Participation à 20h
+                                    </h3> 
+                                    <div class="participation">
+                                        <div class="fond_bar" style="width : 100%">
+                                            <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes20h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes20h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div ng-if="participation.parameters['refine.num_bureau']">
+                        <ods-result-enumerator context="participation" max="1" show-pagination="false">
+                            <h2>
+                                Lieu de vote : {{item.fields.libelle_lieu_de_vote}}
+                            </h2> 
+
+                        </ods-result-enumerator>
+                        <div class="ods-button" 
+                            ng-click="var.tab.numbureau = ''; resultats.parameters = {}; participation.parameters = {};">
+                            Voir les résultats au niveau de la ville 
+                        </div>
+                    </div>
+            
+            <div class="row" style="padding-top: 0px;">
+                <div class="col-md-12" ng-init="var = {}; var.tab={'numbureau':''}">
+                    <div ng-if="participation.parameters['refine.num_bureau']">                                
+                        <p>
+                            Sélectionnez un bureau ci-dessous pour afficher les données.
+                        </p>
+                        <div ods-facet-results="items" 
+                            ods-facet-results-context="participation" 
+                            ods-facet-results-facet-name="code_lieu_de_vote" 
+                            ods-facet-results-sort="ALPHANUM">
+                            <ul class="items tab-links">
+                                <li class="item ods-button ods-button--primary" 
+                                ng-class="{'ods-button--custom': var.tab.numbureau == item.name}" 
+                                ng-click="var.tab.numbureau=item.name; participation2.parameters['refine.code_lieu_de_vote'] = item.name" 
+                                ng-repeat="item in items">
+                                    <span>
+                                        Bureau n° {{ item.name }}
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <div class="col-md-12" ods-results="check" 
+                                ods-results-context="participation" 
+                                ods-results-max="1">
+                                <div class="row" 
+                                    ng-class="item.name" 
+                                    ng-if="var.tab.numbureau == participation2.parameters['refine.code_lieu_de_vote'] &amp;&amp; check.length">
+                                    <div class="col-md-12">
+                                        <div ods-analysis="chiffresparticipation" 
+                                            ods-analysis-context="participation2" 
+                                            ods-analysis-serie-exprimes10h="SUM(votants_10h)" 
+                                            ods-analysis-serie-exprimes12h="SUM(votants_12h)" 
+                                            ods-analysis-serie-exprimes14h="SUM(votants_14h)" 
+                                            ods-analysis-serie-exprimes16h="SUM(votants_16h)" 
+                                            ods-analysis-serie-exprimes17h="SUM(votants_17h)" 
+                                            ods-analysis-serie-exprimes18h="SUM(votants_18h)" 
+                                            ods-analysis-serie-exprimes19h="SUM(votants_19h)" 
+                                            ods-analysis-serie-exprimes20h="SUM(votants_20h)" 
+                                            ods-analysis-serie-inscrits="SUM(inscrits)">
+
+                                            <h3>
+                                                Participation à 10h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%">
+                                                    <div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes10h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                        <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes10h*100/chiffresparticipation.results[0].inscrits | number:1}}%
+                                                        </span></div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 12h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes12h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes12h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 14h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes14h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes14h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 16h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes16h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes16h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 17h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes17h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes17h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 18h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes18h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes18h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 19h
+                                            </h3> 
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes19h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes19h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                                </div>
+                                            </div>
+
+                                            <h3>
+                                                Participation à 20h
+                                            </h3> 
+
+                                            <div class="participation">
+                                                <div class="fond_bar" style="width : 100%"><div class="bar" style="width : {{ chiffresparticipation.results[0].exprimes20h*100/chiffresparticipation.results[0].inscrits}}%">
+                                                    <span class="metric_chiffre"> {{ chiffresparticipation.results[0].exprimes20h*100/chiffresparticipation.results[0].inscrits | number:1}}%</span>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                </div>
+            </div>
+        </ods-dataset-context>
+    </div>
+</ods-dataset-context>

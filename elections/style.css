@@ -1,0 +1,271 @@
+:root {
+    /* Paramétrage des couleurs  */
+  --bleu-chaville: #2864aa;
+  --rose-chaville: #bc1768;
+  --gris-chaville: #ebedef;
+}
+
+/* Les titres */
+.first-header {
+    color: var(--rose-chaville);
+}
+
+/* New CSS > my part */
+.basic-button{
+  border: none;
+  color: white;
+  width: 50%;
+  padding: 9px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+/* présentation de la légende */
+.infos-carto {
+    margin: .9rem 0 .5rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 100%; 
+    height: fit-content;
+    background-color: #F2F2F2;
+    /*border: solid 1px black;*/
+    border-radius: .25rem;
+    box-shadow: rgba(14, 63, 126, 0.04) 0px 0px 0px 1px, rgba(42, 51, 69, 0.04) 0px 1px 1px -0.5px, rgba(42, 51, 70, 0.04) 0px 3px 3px -1.5px, rgba(42, 51, 70, 0.04) 0px 6px 6px -3px, rgba(14, 63, 126, 0.04) 0px 12px 12px -6px, rgba(14, 63, 126, 0.04) 0px 24px 24px -12px;
+}
+
+/* Générateurs de box shadows > https://getcssscan.com/css-box-shadow-examples*/ 
+
+.button-display {
+    width: 100%;
+    display: flex;
+}
+
+.result > span {
+    color: black;
+}
+
+
+.legend {
+    display: flex;
+    align-items: center; 
+    justify-content: center;
+}
+
+.remove-filter {
+    position: absolute;
+    top: 62px;
+    left: 70px;
+    right: 20px;
+    width: 203px;
+    border: 2px solid black;
+    padding: 2px 15px;
+    background: rgba(30, 12, 51, 0.38);
+    color: white;
+    font-weight: 300;
+    font-style: italic;
+    font-size: 1.2em;
+}
+.bureau_title {
+    text-align:center;
+    font-size: 1.4em;
+    margin-top: 10px;
+}
+.metrics {
+    border-radius: 3px;
+    text-align: center;
+}
+.metric {
+    padding: 2px 5px;
+    text-align: center;
+    font-size: 1.6rem;
+    font-weight: 600;
+    line-height: 1em;
+    display: inline-block;
+    float : left;
+    margin-bottom : 30px
+}
+span.metric_name {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-bottom : 1px solid #477d29;
+    padding : 1px;
+
+}
+span.metric_chiffre {
+    font-weight: 600;
+    color: var(--rose-chaville);
+    font-size : 0.8em;
+}
+div.fond_bar{
+    background-color : var(--gris-chaville);
+    height : 25px;
+
+}
+div.bar{
+    background-color : var(--bleu-chaville);
+    height : 25px;
+}
+.name {
+    margin-bottom: 2px;
+}
+.result {
+    position: absolute;
+    right: 3px;
+    bottom: 9px;
+    /*background-color: #65b33a; */
+}
+.participation div.fond_bar{
+    background-color : var(--gris-chaville);
+    height : 25px;
+    border-radius : 2px;
+
+}
+.participation {
+    margin-bottom : 10px;
+}
+.participation div.bar{
+    background-color : var(--bleu-chaville);
+    height : 25px;
+    border-radius : 2px 0 0 2px;
+}
+span.name{
+    margin-top : 20px;
+    font-family: "archive", verdana;
+}
+span.result{
+    text-align: right;
+    position: absolute;
+    bottom: 12px;
+    color : #000;
+    font-weight : bold;
+    font-size : 1.0em;
+    
+}
+.bloc_bureau{
+    min-height: 485px;
+}
+.candidat{
+    padding-bottom : 7px;
+    line-height: 1.1em;
+    position: relative;
+}
+adress {
+    font-weight: 600;
+    width: 300px;
+    height: 80px;
+    display: inline-block;
+    background: url("/assets/theme_image/geoloc.png") no-repeat;
+    text-indent : 60px;
+}
+
+ul.tab-links{
+    padding-left : 0px !important;
+    margin-left : 0px !important;
+
+}
+ul.tab-links li{
+    margin : 0px !important;
+
+}
+.ods-button--primary {
+    background-color : #ffff00;
+    border : 1px solid #fff;
+    border-bottom : none;
+    color : #000000;
+    border-radius : 3px 3px 0 0;
+}
+.ods-button--custom {
+    background-color: #1e0c33;
+    color: white;
+}
+
+.participation .metric_chiffre {
+    color: #fff;
+    float: right;
+    padding-right: 3px;
+    font-weight: normal !important;
+    font-size: 1em;
+}
+.participation .metric_chiffre2 {
+    color: #ffff;
+    float: right;
+    padding-right: 3px;
+    font-weight: normal !important;
+    font-size: 1em;
+}
+.participation .metric_name{
+    text-align : left;
+}
+
+.bureau {
+    border : 1px solid  rgba(0,0,0,0.15);
+    border-radius: 3px;
+
+}
+h2 {
+    margin-top: 0;
+}
+
+.pourcent { 
+    color: #ffffff; 
+    font-weight : 1.2em;
+}
+
+.alert{
+    height: 50px;
+    background-color : #fff;
+    display: flex;
+    flex-direction:column;
+    justify-content: space-around;
+    text-align:center;
+    font-size:1.2em; 
+    margin-bottom:5px;
+
+}
+.alert_bis{
+    margin-top : 20px;
+    height: 66px;
+    display: inline-block;
+    background: url("/assets/theme_image/fleche_bis.png") 15px 2px no-repeat ;
+    background-color : #f5f5f5;
+    padding :7px  17px;
+
+}
+
+.ods-box { 
+    margin-bottom:0px;
+}
+
+
+.ods-tabs__tab.ods-tabs__tab--active, .ods-tabs__tab.ods-tabs__tab--active:hover {
+    border-radius: 10px 10px 0 0;
+}
+
+.ods-tabs__pane.ods-tabs__pane--horizontal {
+        background: #FFFFFF;
+        border-radius: 3px;
+        border: solid 0px #FF0000;
+        padding: 20px;
+        margin-bottom: 20px;
+        min-height: 200px;
+        margin-bottom: 0;
+    }
+
+.item {
+    min-height: 20px;
+}
+
+.ods-button:hover {
+    color:white;
+}
+
+span.bold {
+    font-weight:bold;
+}
+
+
